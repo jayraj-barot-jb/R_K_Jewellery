@@ -1,0 +1,37 @@
+/* Custom Stylesheet */
+
+/* Order Table Styles */
+.order-product-img {
+  width: 150px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.order-progress {
+  height: 8px;
+  border-radius: 4px;
+  background-color: #e9ecef;
+  overflow: hidden;
+}
+
+.order-progress-0 { width: 0%; }
+.order-progress-40 { width: 40%; }
+.order-progress-70 { width: 70%; }
+.order-progress-100 { width: 100%; }
+
+/* Payment & Footer Styles */
+.payment-success-heading {
+  text-align: center;
+  margin: 100px auto;
+  font-size: 2.5rem;
+  color: #0a0a0a;
+}
+
+.icon-success {
+  font-size: 4rem;
+}
+
+.footer-divider {
+  border-color: #1d1d1d !important;
+}

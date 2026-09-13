@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+    {% block content %}
+
+      <div class="container py-5">
+
+
+        <div class="row">
+
+          
+
+          <div class="col-lg-12">
+            <div class="card mb-4" id="tables">
+              <div class="card-header text-center">Orders</div>
+              <div class="card-body">
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Item</th>
+                      <th>Image</th>
+                      <th>Qty.</th>
+                      <th>Ordered Date</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                    {% if orders %}
+
+                    {% for order in orders %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{order.product.title}}</td>
+                      <td>
+                        {% if order.product.product_image %}
+                          <img src="{{order.product.product_image.url}}" alt="{{order.product.title}}" class="order-product-img">
+                        {% endif %}
+                      </td>
+                      <td>{{order.quantity}}</td>
+                      <td>{{order.ordered_date|naturaltime}}</td>
+                      <td>
+
+                        {% if order.status == 'Pending' %}
+                          <span class="badge badge-warning text-white p-2">Pending</span>
+                        {% elif order.status == 'Accepted' %}
+                          <div class="order-progress border border-primary mb-1">
+                            <div class="h-100 bg-primary order-progress-0"></div>
+                          </div>
+                          <small class="font-weight-bold d-block text-primary">{{order.status}}</small>
+                        {% elif order.status == 'Packed' %}
+                          <div class="order-progress border border-primary mb-1">
+                            <div class="h-100 bg-primary order-progress-40"></div>
+                          </div>
+                          <small class="font-weight-bold d-block text-primary">{{order.status}}</small>
+                        {% elif order.status == 'On The Way' %}
+                          <div class="order-progress border border-primary mb-1">
+                            <div class="h-100 bg-primary order-progress-70"></div>
+                          </div>
+                          <small class="font-weight-bold d-block text-primary">{{order.status}}</small>
+                        {% elif order.status == 'Delivered' %}
+                          <div class="order-progress border border-primary mb-1">
+                            <div class="h-100 bg-primary order-progress-100"></div>
+                          </div>
+                          <small class="font-weight-bold d-block text-success">{{order.status}}</small>
+                        {% elif order.status == 'Cancelled' %}
+                          <div class="order-progress border border-danger mb-1">
+                            <div class="h-100 bg-danger order-progress-100"></div>
+                          </div>
+                          <small class="font-weight-bold d-block text-danger">{{order.status}}</small>
+                        {% else %}
+                          {{order.status}}
+                        {% endif %}
+                      </td>
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
+                    
+                  </tbody>
+                </table>
+                
+              </div>
+            </div>
+          </div>
+          
+        </div>
+    
+        
+        
+      </div>
+{% endblock content %}
